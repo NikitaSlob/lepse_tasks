@@ -1,0 +1,10 @@
+some_variable
+someVariable
+tryToConvertMe
+try_to_convert_me
+unchanged
+InvalidMethod
+bad_VarName
+_try_to_convert_me
+try_to__convert_me
+someVARiable
