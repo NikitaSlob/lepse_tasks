@@ -40,13 +40,16 @@ public class Main {
                 int neighboursWidth = 0;
                 for (int j = 0; j < 6; j++) {
                     if (i != j) {
-                        if ((matrix[i][0] == matrix[j][0] && matrix[i][1] == matrix[j][1])
-                                || (matrix[i][1] == matrix[j][0] && matrix[i][0] == matrix[j][1])) {
+                        if (((matrix[i][0] == matrix[j][0] && matrix[i][1] == matrix[j][1])
+                                || (matrix[i][1] == matrix[j][0] && matrix[i][0] == matrix[j][1])) && !opposite) {
                             opposite = true;
-                        } else if (matrix[i][1] == matrix[j][0] || matrix[i][1] == matrix[j][1]) {
-                            neighboursLength += 1;
-                        } else if (matrix[i][0] == matrix[j][0] || matrix[i][0] == matrix[j][1])  {
-                            neighboursWidth += 1;
+                        } else {
+                            if (matrix[i][1] == matrix[j][0] || matrix[i][1] == matrix[j][1]) {
+                                neighboursLength += 1;
+                            }
+                            if (matrix[i][0] == matrix[j][0] || matrix[i][0] == matrix[j][1]) {
+                                neighboursWidth += 1;
+                            }
                         }
                     }
                 }

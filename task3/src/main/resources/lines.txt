@@ -8,3 +8,6 @@ bad_VarName
 _try_to_convert_me
 try_to__convert_me
 someVARiable
+var_
+varX
+_

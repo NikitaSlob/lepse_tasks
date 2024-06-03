@@ -37,26 +37,24 @@ public class Main {
             // Обнаружение точки
 
             boolean findSomething = false;
-            for (int indexI = 0; indexI < length; indexI++) {
-                for (int indexJ = 0; indexJ < width; indexJ++) {
-                    int current = matrix[indexI][indexJ];
-                    boolean sedl = true;
-                    for (int subi = 0; subi < length; subi++) {
-                        if (indexI != subi && current < matrix[subi][indexJ]) {
-                            sedl = false;
-                            break;
-                        }
+            for (int indexI = 0; indexI < length * width; indexI++) {
+                int current = matrix[indexI / width][indexI % width];
+                boolean sedl = true;
+                for (int subi = 0; subi < length; subi++) {
+                    if (indexI / width != subi && current < matrix[subi][indexI % width]) {
+                        sedl = false;
+                        break;
                     }
-                    for (int subj = 0; subj < width && sedl; subj++) {
-                        if (indexJ != subj && current > matrix[indexI][subj]) {
-                            sedl = false;
-                            break;
-                        }
+                }
+                for (int subj = 0; subj < width && sedl; subj++) {
+                    if (indexI % width != subj && current > matrix[indexI / width][subj]) {
+                        sedl = false;
+                        break;
                     }
-                    if (sedl) {
-                        findSomething = true;
-                        System.out.println("Найдена седловая точка на позиции " + (indexI + 1) + ", " + (indexJ + 1));
-                    }
+                }
+                if (sedl) {
+                    findSomething = true;
+                    System.out.println("Найдена седловая точка на позиции " + (indexI / width + 1) + ", " + (indexI % width + 1));
                 }
             }
 

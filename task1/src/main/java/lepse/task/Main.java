@@ -3,6 +3,7 @@ package lepse.task;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Objects;
+import java.util.Stack;
 
 public class Main {
     /**
@@ -24,48 +25,49 @@ public class Main {
             String line = reader.readLine();
 
             //Считаем каждые скобки
+            Stack<Integer> stack = new Stack<>();
 
             while (line != null) {
-
-                int round = 0;
-                int square = 0;
-                int braces = 0;
                 boolean expressionCorrect = true;
-
+                stack.clear();
                 for (char ch : line.toCharArray()) {
                     switch (ch) {
                         case '(':
-                            round++;
+                            stack.add(0);
                             break;
                         case ')':
-                            round--;
+                            if (stack.isEmpty() || stack.pop() != 0) {
+                                expressionCorrect = false;
+                            }
                             break;
                         case '[':
-                            square++;
+                            stack.add(1);
                             break;
                         case ']':
-                            square--;
+                            if (stack.isEmpty() || stack.pop() != 1) {
+                                expressionCorrect = false;
+                            }
                             break;
                         case '{':
-                            braces++;
+                            stack.add(2);
                             break;
                         case '}':
-                            braces--;
+                            if (stack.isEmpty() || stack.pop() != 2) {
+                                expressionCorrect = false;
+                            }
                             break;
                     }
 
-                    if (round < 0 || square < 0 || braces < 0) {
-                        expressionCorrect = false;
+                    if (!expressionCorrect) {
                         break;
                     }
 
                 }
 
-                // Под конец количество открывающих и закрывающих должно быть равно и закрывающих никогда не должно быть больше
-
-                if (round != 0 || square != 0 || braces != 0) {
+                if (!stack.isEmpty()) {
                     expressionCorrect = false;
                 }
+
                 if (expressionCorrect) {
                     System.out.println(line + " - правильная скобочная последовательность.");
                 } else {

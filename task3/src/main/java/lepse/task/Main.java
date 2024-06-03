@@ -55,7 +55,7 @@ public class Main {
                         newLine = builder.toString();
                     } else if (newLine.charAt(indexI) == '_') {
                         //Проверка snake_case
-                        if (camel || (indexI + 1 != newLine.length() && newLine.charAt(indexI + 1) == '_')) {
+                        if (camel || indexI + 1 >= newLine.length() || newLine.charAt(indexI + 1) == '_') {
                             //Если уже были заглавные буквы или несколько прочерков подряд то ошибка
                             correct = false;
                             break;
